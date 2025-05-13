@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Sude'ye Tatlı Bir Şey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(120deg, #ffe4e1, #fff0f5);
+      overflow: hidden;
+    }
+
+    #namePrompt {
+      position: absolute;
+      top: 40%;
+      width: 100%;
+      text-align: center;
+      z-index: 2;
+    }
+
+    #namePrompt input {
+      padding: 10px 15px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    #namePrompt button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+      border-radius: 10px;
+      border: none;
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #namePrompt button:hover {
+      background-color: #ff1493;
+    }
+
+    #container {
+      display: none;
+      text-align: center;
+      padding-top: 20vh;
+      z-index: 1;
+      position: relative;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.5em;
+      color: #d63384;
+      animation: fadeIn 2s ease-out;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #5c5c5c;
+      margin-top: 10px;
+      animation: fadeIn 3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .flower {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      animation: fall linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .glow {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: glowMove 10s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes glowMove {
+      0% {
+        top: 0%;
+        left: 0%;
+      }
+      100% {
+        top: 100%;
+        left: 100%;
+      }
+    }
+
+    .heart {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/a/a7/Heart_icon_3.svg') no-repeat center;
+      background-size: contain;
+      animation: heartBeat 1s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes heartBeat {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 0.6;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .emoji {
+      position: absolute;
+      font-size: 24px;
+      animation: emojiFall linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes emojiFall {
+      0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="namePrompt">
+  <input type="text" id="nameInput" placeholder="Adını gir...">
+  <button onclick="checkName()">Gönder</button>
+</div>
+
+<div id="container">
+  <h1>Selam Sude 🌸</h1>
+  <p>Bu sayfa sadece sana özel hazırlandı… Küçük ama tatlı bir tebessüm olsun istedim 💖</p>
+</div>
+
+
+<script>
+  const flowerImages = [
+    "https://pngimg.com/uploads/flower/flower_PNG13177.png",
+    "https://pngimg.com/uploads/rose/rose_PNG664.png",
+    "https://pngimg.com/uploads/flower/flower_PNG13220.png",
+    "https://pngimg.com/uploads/flower/flower_PNG13207.png"
+  ];
+
+  const emojis = ['💖', '🌹', '✨', '😊', '🌸'];
+
+  function createFlowers() {
+    for (let i = 0; i < 50; i++) {
+      const flower = document.createElement('div');
+      flower.classList.add('flower');
+      const size = Math.random() * 25 + 20;
+      flower.style.width = size + 'px';
+      flower.style.height = size + 'px';
+      flower.style.left = Math.random() * 100 + 'vw';
+      flower.style.top = -Math.random() * 100 + 'px';
+      flower.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      flower.style.animationDelay = Math.random() * 3 + 's';
+      flower.style.backgroundImage = `url(${flowerImages[Math.floor(Math.random() * flowerImages.length)]})`;
+      document.body.appendChild(flower);
+    }
+  }
+
+  function createGlowEffect() {
+    for (let i = 0; i < 5; i++) {
+      const glow = document.createElement('div');
+      glow.classList.add('glow');
+      glow.style.top = Math.random() * 100 + 'vh';
+      glow.style.left = Math.random() * 100 + 'vw';
+      document.body.appendChild(glow);
+    }
+  }
+
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.top = Math.random() * 50 + 'vh';
+    heart.style.left = Math.random() * 50 + 'vw';
+    document.body.appendChild(heart);
+  }
+
+  function createEmoji() {
+    const emoji = document.createElement('div');
+    emoji.classList.add('emoji');
+    emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+    emoji.style.top = Math.random() * 100 + 'vh';
+    emoji.style.left = Math.random() * 100 + 'vw';
+    emoji.style.animationDuration = (Math.random() * 5 + 3) + 's';
+    document.body.appendChild(emoji);
+  }
+
+  function checkName() {
+    const name = document.getElementById('nameInput').value.trim().toLowerCase();
+    if (name === 'sude') {
+      document.getElementById('namePrompt').style.display = 'none';
+      document.getElementById('container').style.display = 'block';
+      createFlowers();
+      createGlowEffect();
+      createHeart();
+      createEmoji();
+    } else {
+      alert("Bu sayfa sadece Sude için 💐");
+    }
+  }
+</script>
+
+</body>
+</html>
